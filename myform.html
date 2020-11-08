@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+.label {float: left; width: 120px; }
+.error { color: red; padding-left: 10px; }
+.submit { margin-left: 125px; margin-top: 10px;}
+div{padding: 5px; }
+</style>
+</head>
+<body>
+    <script>
+        $(document).ready(function() { 
+         $('.error').hide();                  /*  menyembunyikan fungsi error  */
+         $('.userid').blur(function(){         /* membuat syntak yang dapat menjalankan beberapa fungsi di kotak dengan syarat di bawah*/
+         data=$('.userid').val();
+         var len=data.length;
+         if(len<1)
+         {
+         $('.userid').next().show();
+         $('.password').attr('disabled',true);
+         $('.confpass').attr('disabled',true);
+         }  /*  jika kosong (var len<1) maka pass dan confirm pass terdisable */ 
+         else
+         {
+         $('.userid').next().hide();
+         $('.password').removeAttr('disabled');
+         $('.confpass').removeAttr('disabled');
+         } /*  jika tidak kosong maka disable dihilangkan*/
+         });
+         $('.password').blur(function(){   /*  membuat program yang dapat menjalankan beberapa fungsi di kolom password dengan syarat di bawah */
+         data=$('.password').val();
+         var len=data.length;
+         if(len<1)
+         {
+         $('.password').next().show();
+         $('.confpass').attr('disabled',true);
+         } /* jika data kosong (var len<1) maka confirm password terdisable*/
+         else
+         {
+         $('.password').next().hide();
+         $('.confpass').removeAttr('disabled');
+         } /*  jika tidak kosong maka disable dihilangkan */
+         });
+         $('.confpass').blur(function(){ /*  membuat program yang dapat menjalankan beberapa fungsi di kolom confpass dengan syarat di bawah*/
+         if($('.password').val() !=$('.confpass').val())
+         { 
+         $('.confpass').next().show();
+         } /* jika password tidak sama dengan confpass masa fungsi .confpass ditampilkan */
+         else
+         {
+         $('.confpass').next().hide();
+         } /*  jika password sama dengan confpass masa fungsi .confpass disembunyikan  */
+         });
+        }); 
+        </script>
+    <div class="container">
+        <div class="row"> 
+            <div class="col-12" >
+                <form>
+                    <div ><span class="label">Nama Dosen </span><input type="text" class="userid" name="userid"/></div>
+                    <div ><span class="label">Password </span><input type="password" class="password"name="password" /><span class="error"> Password cannot be blank</span></div>
+                    <div ><span class="label">Confirm Password </span><input type="password" class="confpass"name="confpass" /><span class="error"> Password and Confirm Password don'tmatch</span></div>
+                    <input class="submit" type="submit" value="Submit">
+                </form> 
+            </div>
+        </div>
+    </div>
+    
+</body>
